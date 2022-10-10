@@ -24,9 +24,10 @@ public class Mandelbrot extends FractalGenerator {
     }
 
     /**
-     * mandelbrot function : z_n = z_{n+1} + c (markdown)
+     * mandelbrot function : z_n = z_{n-1}^2 + c (markdown)
      * z_0 = 0
      * |z| < 2^2
+     * z^2 = x^2 + 2xiy - y^2
      * */
     @Override
     public int numIterations(double x, double y) {
@@ -48,5 +49,10 @@ public class Mandelbrot extends FractalGenerator {
         } else {
             return iterationCount;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Mandelbrot";
     }
 }
