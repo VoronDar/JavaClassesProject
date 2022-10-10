@@ -5,25 +5,15 @@ package com.lya_cacoi.lab1;
  */
 public class Palindrome {
     public static void main(String[] args) {
-        double d1 = 0;
-        for (int i = 1; i <= 8; i++) {
-            d1 += 0.1;
-        }
-
-        double d2 = 0.1 * 8;
-
-        System.out.println(d1);
-        System.out.println(d2);
-        System.out.println(d1 == d2);
-        System.out.println(Double.compare(d1, d2));
-
         for (String s : args) {
-            System.out.printf(
-                    "reversed string for '%s' is  '%s'. The string is palindrome: %b%n",
-                    s,
-                    reverseString(s),
-                    isPalindrome(s)
-            );
+            if (isPalindrome(s)) {
+                System.out.printf(
+                        "reversed string for '%s' is  '%s'. The string is palindrome: %b%n",
+                        s,
+                        reverseString(s),
+                        isPalindrome(s)
+                );
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.lya_cacoi.lab2;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -78,11 +79,12 @@ public class Point3d implements Comparable<Point3d> {
      * */
     public double distanceTo(Point3d point) {
         if (point == null) throw new IllegalStateException("point parameter must be not null");
-        return Math.sqrt(
+        double distance =  Math.sqrt(
                 Math.pow(point.xCoord - xCoord, 2)
                         + Math.pow(point.yCoord - yCoord, 2)
                         + Math.pow(point.zCoord - zCoord, 2)
         );
+        return Double.parseDouble(String.format(Locale.ROOT, "%.2f", distance));
     }
 
     @Override
