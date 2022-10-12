@@ -11,13 +11,24 @@ public class SocketClient {
 
     /**
      * open socket with port=80 (for http, not https)
-     * */
+     */
     public void openSocketForHttp(String host) {
-        try {
-            mySocket = new Socket(host, 80);
-            mySocket.setSoTimeout(5000);
-        } catch (IOException e) {
-            closeSocket();
+        openSocketForHttp(host, new HttpRequestMeta());
+    }
+
+    /**
+     * open socket with port=80 (for http, not https)
+     */
+    public void openSocketForHttp(String host, HttpRequestMeta requestMeta) {
+        if (requestMeta == null) {
+            openSocketForHttp(host);
+        } else {
+            try {
+                mySocket = new Socket(host, 80);
+                mySocket.setSoTimeout(requestMeta.timeout);
+            } catch (IOException e) {
+                closeSocket();
+            }
         }
     }
 
@@ -34,29 +45,42 @@ public class SocketClient {
     /**
      * open socket, request http, close socket.
      * The response is passed through callback
-     * */
+     */
     public void requestSingleHttp(String path, String host, SocketCallback callback) {
-        try {
-            openSocketForHttp(host);
-            if (mySocket.isConnected()) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
-                HttpRequestHelper.requestHttp1_1(mySocket.getOutputStream(), path, host);
-                callback.onSuccess(in);
-            } else {
-                callback.onError(new SocketException("unable to connect to socket"));
+        requestSingleHttp(path, host, new HttpRequestMeta(), callback);
+    }
+
+    /**
+     * open socket, request http, close socket.
+     * The response is passed through callback
+     */
+    public void requestSingleHttp(String path, String host, HttpRequestMeta httpRequestMeta, SocketCallback callback) {
+        if (httpRequestMeta == null) {
+            requestSingleHttp(path, host, callback);
+        } else {
+            try {
+                openSocketForHttp(host, httpRequestMeta);
+                if (mySocket != null && mySocket.isConnected()) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
+                    HttpRequestHelper.requestHttp1_1(mySocket.getOutputStream(), path, host);
+                    callback.onSuccess(in);
+                } else {
+                    callback.onError(new SocketException("unable to connect to socket"));
+                }
+            } catch (Exception e) {
+                callback.onError(e);
+            } finally {
+                closeSocket();
             }
-        } catch (Exception e) {
-            callback.onError(e);
-        } finally {
-            closeSocket();
         }
     }
 
     /**
      * callback for getting the result of request sending with socket
-     * */
-    interface SocketCallback {
+     */
+    public interface SocketCallback {
         void onSuccess(BufferedReader in);
+
         void onError(Exception e);
     }
 }

@@ -1,6 +1,7 @@
 package com.lya_cacoi.lab7;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +15,16 @@ public class Crawler {
 
     public static void main(String[] args) {
         Crawler crawler = new Crawler();
-        System.out.println("found: " + crawler.scan(args[0], Integer.parseInt(args[1])));
+        String url;
+        int maxDepth;
+        try {
+            url = args[0];
+            maxDepth = Integer.parseInt(args[1]);
+        } catch (Exception e) {
+            System.out.printf("unexpected arguments. Expected '[string], [int]', got %s", Arrays.toString(args));
+            return;
+        }
+        System.out.println("found: " + crawler.scan(url, maxDepth));
     }
 
     /**
@@ -47,6 +57,8 @@ public class Crawler {
             URLDepthPair currentPair = linksToSearch.removeFirst();
             if (currentPair.loadingDeps < maxDepth) {
                 processSinglePath(currentPair);
+            } else {
+                viewedLinks.add(currentPair);
             }
         }
     }
@@ -100,4 +112,5 @@ public class Crawler {
         }
         return false;
     }
+
 }

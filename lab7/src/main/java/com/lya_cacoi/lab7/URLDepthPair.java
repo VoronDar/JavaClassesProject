@@ -48,11 +48,11 @@ public class URLDepthPair {
     @Override
     public String toString() {
         if (scanningException != null) {
-            return "url='" + url
+            return "\nurl='" + url
                     + ", loadingDeps=" + loadingDeps
-                    + ", failed to access with exception " + scanningException + "\n";
+                    + ", failed to access with exception " + scanningException;
         } else {
-            return "url='" + url + ", loadingDeps=" + loadingDeps + "\n";
+            return "\nurl='" + url + ", loadingDeps=" + loadingDeps;
         }
     }
 }
