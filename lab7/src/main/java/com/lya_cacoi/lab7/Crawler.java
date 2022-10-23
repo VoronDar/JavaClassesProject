@@ -35,32 +35,25 @@ public class Crawler {
     }
 
     /**
-     * wrap 'process' method in try-catch.
+     * search all links in html document for the url, request these links documents and loop operation
      *
      * @return all found valid links.
      */
     public LinkedList<URLDepthPair> scan(String startUrl, int maxDepth) {
         try {
-            process(startUrl, maxDepth);
+            linksToSearch.add(new URLDepthPair(startUrl, 0));
+            while (!linksToSearch.isEmpty()) {
+                URLDepthPair currentPair = linksToSearch.removeFirst();
+                if (currentPair.loadingDeps < maxDepth) {
+                    processSinglePath(currentPair);
+                } else {
+                    viewedLinks.add(currentPair);
+                }
+            }
         } catch (NumberFormatException | IOException e) {
             System.out.println("usage: java Crawler " + startUrl + " " + maxDepth + "\n exception: " + e);
         }
         return getSites();
-    }
-
-    /**
-     * search all links in html document for the url, request these links documents and loop operation
-     */
-    public void process(String url, int maxDepth) throws IOException {
-        linksToSearch.add(new URLDepthPair(url, 0));
-        while (!linksToSearch.isEmpty()) {
-            URLDepthPair currentPair = linksToSearch.removeFirst();
-            if (currentPair.loadingDeps < maxDepth) {
-                processSinglePath(currentPair);
-            } else {
-                viewedLinks.add(currentPair);
-            }
-        }
     }
 
     private void processSinglePath(final URLDepthPair currentPair) throws IOException {
@@ -98,7 +91,7 @@ public class Crawler {
     }
 
     /**
-     * @return true if given url has been founded
+     * @return true if the given url has been founded
      */
     private boolean isKnownUrl(final String url) {
         return (isListContainsUrl(linksToSearch, url) || isListContainsUrl(viewedLinks, url));

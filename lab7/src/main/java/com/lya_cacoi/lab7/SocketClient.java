@@ -80,7 +80,6 @@ public class SocketClient {
      */
     public interface SocketCallback {
         void onSuccess(BufferedReader in);
-
         void onError(Exception e);
     }
 }

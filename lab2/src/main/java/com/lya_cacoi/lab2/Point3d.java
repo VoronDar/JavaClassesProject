@@ -1,6 +1,5 @@
 package com.lya_cacoi.lab2;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -22,7 +21,7 @@ public class Point3d implements Comparable<Point3d> {
 
     /**
      * Default value for all fields is 0.0
-     * */
+     */
     public Point3d() {
         this(0, 0, 0);
     }
@@ -75,11 +74,12 @@ public class Point3d implements Comparable<Point3d> {
 
     /**
      * returns the distance between two points rounded to 2 decimal places
+     *
      * @throws IllegalStateException if the point parameter is null
-     * */
+     */
     public double distanceTo(Point3d point) {
         if (point == null) throw new IllegalStateException("point parameter must be not null");
-        double distance =  Math.sqrt(
+        double distance = Math.sqrt(
                 Math.pow(point.xCoord - xCoord, 2)
                         + Math.pow(point.yCoord - yCoord, 2)
                         + Math.pow(point.zCoord - zCoord, 2)

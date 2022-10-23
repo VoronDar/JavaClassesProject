@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
  * */
 public class HtmlParser {
 
+    private static final String HTTP_HEADER = "http://";
+
         /**
          * scan server answer for 301 (moved permanently) error
          * @return location or null if server response doesn't have this error.
@@ -42,11 +44,11 @@ public class HtmlParser {
             String line;
             LinkedList<String> foundLinks = new LinkedList<>();
             while ((line = in.readLine()) != null) {
-                Pattern linkPattern = Pattern.compile("<a href=\"http://\\S+\">", Pattern.CASE_INSENSITIVE);
+                Pattern linkPattern = Pattern.compile("<a href=\"" + HTTP_HEADER + "\\S+\">", Pattern.CASE_INSENSITIVE);
                 Matcher matcher = linkPattern.matcher(line);
                 while (matcher.find()) {
-                    int startIndex = matcher.group().indexOf("http://");
-                    int endIndex = matcher.group().indexOf(">") - 2;
+                    int startIndex = matcher.group().indexOf(HTTP_HEADER);
+                    int endIndex = matcher.group().indexOf(">") - 1;
                     foundLinks.add(matcher.group().substring(startIndex, endIndex));
                 }
             }
