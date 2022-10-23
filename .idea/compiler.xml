@@ -3,6 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="ItProject.app" target="11" />
+      <module name="ItProject.Tasks" target="1.9" />
+      <module name="ItProject.Tasks.main" target="1.9" />
+      <module name="ItProject.Tasks.test" target="1.9" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_9
+    targetCompatibility = JavaVersion.VERSION_1_9
+}
+/*
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+ */
+dependencies {
+    implementation fileTree(dir: 'libs', include: '*.jar')
+    implementation files('C:/Users/User/AndroidStudioProjects/ItProject/libs/jama.jar')
+    //implementation files('libs/jama.jar')
+}
