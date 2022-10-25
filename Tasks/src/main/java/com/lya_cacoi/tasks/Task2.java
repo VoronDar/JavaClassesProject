@@ -154,7 +154,7 @@ public class Task2 {
      */
     private static boolean isValid(String s) {
         // регулярка - проверяет строку на полное совпадение "только цифры от 1 до 5 раз"
-        return Pattern.compile("\\d{1,5}").matcher(s).matches();
+        return Pattern.compile("\\d{5}").matcher(s).matches();
     }
 
     /**

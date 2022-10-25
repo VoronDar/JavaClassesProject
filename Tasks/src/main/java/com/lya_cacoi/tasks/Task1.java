@@ -53,7 +53,6 @@ public class Task1 {
     /**
      * 1 задание
      * @return remainder of dividing d to d2
-     * Использует оператор % для вычисления
      */
     private static int remainder(int d, int d2) {
         return d % d2;
@@ -86,7 +85,7 @@ public class Task1 {
 
     /**
      * 5 задание
-     * @return how you should operate on numbers a and b to get h
+     * @return how you should operate on numbers a and b to get n
      */
     private static String operation(int n, int a, int b) {
         if (a + b == n) {

@@ -13,23 +13,23 @@ public class Lab2 {
         Point3d point3 = new Point3d();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Input x coord for 1 point:");
-        point1.setxCoord(scanner.nextDouble());
+        point1.setX(scanner.nextDouble());
         System.out.print("Input y coord for 1 point:");
-        point1.setyCoord(scanner.nextDouble());
+        point1.setY(scanner.nextDouble());
         System.out.print("Input z coord for 1 point:");
-        point1.setzCoord(scanner.nextDouble());
+        point1.setZ(scanner.nextDouble());
         System.out.print("Input x coord for 2 point:");
-        point2.setxCoord(scanner.nextDouble());
+        point2.setX(scanner.nextDouble());
         System.out.print("Input y coord for 2 point:");
-        point2.setyCoord(scanner.nextDouble());
+        point2.setY(scanner.nextDouble());
         System.out.print("Input z coord for 2 point:");
-        point2.setzCoord(scanner.nextDouble());
+        point2.setZ(scanner.nextDouble());
         System.out.print("Input x coord for 3 point:");
-        point3.setxCoord(scanner.nextDouble());
+        point3.setX(scanner.nextDouble());
         System.out.print("Input y coord for 3 point:");
-        point3.setyCoord(scanner.nextDouble());
+        point3.setY(scanner.nextDouble());
         System.out.print("Input z coord for 3 point:");
-        point3.setzCoord(scanner.nextDouble());
+        point3.setZ(scanner.nextDouble());
 
 
         scanner.close();

@@ -19,8 +19,6 @@ public class URLPool {
 
     private final Set<String> seenUrls = new HashSet<>();
 
-    private int counter = 0;
-
     private final LinkedList<URLDepthPair> linksToSearch = new LinkedList<>();
     private final LinkedList<URLDepthPair> viewedPairs = new LinkedList<>();
 
@@ -67,8 +65,6 @@ public class URLPool {
             while (linksToSearch.isEmpty()) {
                 wait();
             }
-            counter+=1;
-            System.out.println(counter);
         } catch (InterruptedException ignored) {
         }
         sleepWorkersCount--;
